@@ -24,3 +24,20 @@
   (let ((primes-x (prime-factors x))
 	(primes-y (prime-factors y)))
     (biggest-com-prime primes-x primes-y)))
+
+(define (fs n)
+  "Start point for finding of prime factors"
+  (floor (/ n 2)))
+
+(define primes? check-primes?)
+
+(define (pf1 N M x)
+  (cond
+   ((<= x 0) 1)
+   ((= x 1) x)
+   ((and (primes? N x) (primes? M x)) x)
+   (#t (pf1 N M (- x 1)))))
+
+(define (pf N M)
+  (if (> N M) (pf1 N M (fs N))
+      (pf1 M N (fs M))))
