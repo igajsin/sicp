@@ -10,30 +10,18 @@
     (lambda (x)
       (f (f x)))))
 
-(define (add-1 n)
-  (lambda (f) (lambda (x)
-	   (f ((n f) x)))))
-
-(define (plus n m)
-  (lambda (f)
-    (lambda (x)
-      (lambda (y)
-	(((m f) x) y)
-	((n f) x)))))
-
-(define tr
+(define tree
   (lambda (f)
     (lambda (x)
       (f (f (f x))))))
 
-(define tr2
+(define (add-1 n)
+  (lambda (f) (lambda (x)
+	   (f ((n f) x)))))
+
+(define (plus a b)
   (lambda (f)
     (lambda (x)
-      (lambda (x) (f (f x))
-	 (f x)))))
+      ((a f) ((b f) x)))))
 
-
-(define (plus n m)
-  (lambda (f)
-    (lambda (x)
-      (((m f ) x) ((n f) x)))))
+(= (((plus tree two) succ) 0) 5)
