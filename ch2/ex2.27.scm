@@ -1,0 +1,6 @@
+(define (deep-reverse items)
+  (fold (lambda (x acc)
+	  (cons (if (pair? x) (deep-reverse x)
+		    x)
+		acc))
+	      '() items))
