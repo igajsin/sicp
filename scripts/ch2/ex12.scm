@@ -1,4 +1,12 @@
-(define-module (ch2 ex12))
+(define-module (ch2 ex12)
+  :export (
+	   make-center-percent
+	   make-interval
+	   add-interval
+	   mul-interval
+	   div-interval
+	   ))
+(use-modules (srfi srfi-1))
 
 (define make-interval cons)
 (define lower-bound car)
@@ -45,12 +53,13 @@
 		 (max (* (lower-bound x) (lower-bound y))
 		      (* (upper-bound x) (lower-bound y)))))
 
+(define mul-interval mul-interval2)
 (define (div-interval x y)
   "I hope that lower-bound lower than upper-bound"
   (if (and (< (lower-bound y) 0)
 	   (> (upper-bound y) 0))
       (error "cross zero")
-      (mul-interval x
+      (mul-interval2 x
 		(make-interval (/ 1.0 (upper-bound y))
 			       (/ 1.0 (lower-bound y))))))
 
